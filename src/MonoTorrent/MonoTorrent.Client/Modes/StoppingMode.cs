@@ -22,8 +22,9 @@ namespace MonoTorrent.Client
 			if (manager.Mode is HashingMode)
 				handle.AddHandle(((HashingMode)manager.Mode).hashingWaitHandle, "Hashing");
 
-			if (manager.TrackerManager.CurrentTracker != null && manager.TrackerManager.CurrentTracker.Status == TrackerState.Ok)
-				handle.AddHandle(manager.TrackerManager.Announce(TorrentEvent.Stopped), "Announcing");
+            // Does not work reliable so we drop it for now, because it prevents stopping torrents.
+			// if (manager.TrackerManager.CurrentTracker != null && manager.TrackerManager.CurrentTracker.Status == TrackerState.Ok)
+			//	handle.AddHandle(manager.TrackerManager.Announce(TorrentEvent.Stopped), "Announcing");
 
 			foreach (PeerId id in manager.Peers.ConnectedPeers)
 				if (id.Connection != null)
